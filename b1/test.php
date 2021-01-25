@@ -31,7 +31,31 @@
 		}
 		return false;
 	}
+	echo '<br/>';
+	// bien toan cuc va bien cuc bo
+	
+	$hello = 'hello'; // global : pham vi hoat dong o moi noi ke tu noi no duoc khai bao
+	function sayHello() {
+		global $hello;
+		$goodbye = 'goodbye'; // local : pham vi hoat dong noi bo trong ham
+		// su dung 1 bien global tu ben ngoai vao trong ham
+		echo $hello . $goodbye;
+	}
+	sayHello();
+	// su dung bien static trong function
 
+	function myCount() {
+		static $c = 0;
+		// gia tri cua bien se duoc luu lai sau moi lan goi ham su dung
+		$c++;
+		echo $c;
+	}
+	echo '<br/>';
+	myCount();
+	echo '<br/>';
+	myCount();
+	echo '<br/>';
+	myCount();
 
 
 
