@@ -12,6 +12,7 @@
 		$mess = $_GET['mess'] ?? '';
 		$day = $_GET['d'] ?? '';
 		$day = is_numeric($day) ? $day : null;
+		$birthday = $_GET['birthday'] ?? '';
 	?>
 	<div class="container">
 		<h1> Kiem tra ngay sinh nhat</h1>
@@ -29,7 +30,7 @@
 		<?php endif; ?>
 
 		<form method="post" action="server/check-date.php">
-			<input type="date" name="birthday" placeholder="moi nhap ngay sinh cua ban" />
+			<input type="date" name="birthday" placeholder="moi nhap ngay sinh cua ban" value="<?= $birthday; ?>" />
 			<button type="submit" name="btnCheckDate"> Kiem tra</button>
 		</form>
 	</div>
