@@ -42,8 +42,10 @@
 						beforeSend: function(){
 							$('#loading').show();
 						},
-						success: function(){
+						success: function(data){
 							$('#loading').hide();
+							// bien data trong ham success chinh la du lieu ma ben server da response ve
+							$('#results').html(data);
 						}
 					});
 				}
