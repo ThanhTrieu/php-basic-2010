@@ -37,6 +37,31 @@ function add() {
 	}
 }
 
+function remove() {
+	$id = $_GET['id'] ?? '';
+	$id = is_numeric($id) ? $id : 0;
+	// xoa san pham co ma id nay trong gio hang
+	// kiem tra xem co ton tai ko ?
+	if(isset($_SESSION['cart'][$id])){
+		unset($_SESSION['cart'][$id]);
+	}
+	// quay ve xem co san pham nao trong gio hang vua xoa
+	header('Location:index.php?c=cart&m=index');
+}
+
+function update(){
+	$id = $_GET['id'] ?? '';
+	$id = is_numeric($id) ? $id : 0;
+
+	$qty = $_GET['qty'] ?? '';
+	$qty = (is_numeric($qty) && $qty > 0 && $qty < 10)  ? $qty : 1;
+
+	if(isset($_SESSION['cart'][$id])){
+		$_SESSION['cart'][$id]['qty'] = $qty;
+	}
+	header('Location:index.php?c=cart&m=index');
+}
+
 function index(){
 	$carts = $_SESSION['cart'] ?? [];
 	require 'view/list_carts.php';

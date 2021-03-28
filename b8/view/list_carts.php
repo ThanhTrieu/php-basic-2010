@@ -27,7 +27,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($carts as $key => $item):?>
+							<?php $totalMoney = 0; ?>
+							<?php foreach ($carts as $key => $item): ?>
+								<?php $totalMoney += ($item['price']*$item['qty']); ?>
 								<tr>
 									<td><?= $item['id']; ?></td>
 									<td><?= $item['name'];?></td>
@@ -36,14 +38,14 @@
 									</td>
 									<td><?= number_format($item['price']); ?></td>
 									<td>
-										<input type="number" value="<?= $item['qty'] ?>"/>
+										<input id="qty_<?= $item['id']; ?>" type="number" value="<?= $item['qty'] ?>"/>
 									</td>
 									<td>
 										<?= number_format($item['price']*$item['qty']); ?>
 									</td>
 									<td class="text-center">
-										<button class="btn btn-danger">xoa</button>
-										<button class="btn btn-info">cap nhat</button>
+										<a href="index.php?c=cart&m=remove&id=<?= $item['id']; ?>"class="btn btn-danger">xoa</a>
+										<button onClick="updateCart(<?= $item['id']; ?>)" class="btn btn-info">cap nhat</button>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -51,7 +53,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="5">Tong tien</td>
-								<td colspan="3"> 121323223 </td>
+								<td colspan="3"> <?= number_format($totalMoney); ?> </td>
 							</tr>
 						</tfoot>
 					</table>
@@ -60,5 +62,11 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function updateCart(id){
+			let qty = document.getElementById('qty_'+id).value;
+			window.location.href = "index.php?c=cart&m=update&id="+id+"&qty="+qty;
+		}
+	</script>
 </body>
 </html>
